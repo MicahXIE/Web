@@ -1,0 +1,47 @@
+1. Microservices vs SOA
+
+microservice:
+Define an architecture that structures the application as a set of loosely coupled, collaborating services. This approach corresponds to the Y-axis of the Scale Cube. Each service implements a set of narrowly, related functions. For example, an application might consist of services such as the order management service, the customer management service etc.
+
+(Scale Cube: X load balancer, Y functional decomposition, Z data partitioning)
+
+Services communicate using either synchronous protocols such as HTTP/REST or asynchronous protocols such as AMQP. Services can be developed and deployed independently of one another. Each service has its own database in order to be decoupled from other services. Data consistency between services is maintained using the Saga pattern
+
+https://microservices.io/patterns/microservices.html
+
+SOA architecture:
+Service-oriented architecture (SOA) is a way of organizing software. 
+SOA involves the deployment of services, which are units of logic that run in a network. 
+SOA implies a style of development that focuses on the business as a whole and on modularity and reuse. 
+
+ESB: Enterprise Service Bus
+
+微服务不再强调SOA架构中的ESB服务总线，是一个去中心化的面向服务架构。而SOA也需要依赖ESB的面向服务架构，可以理解为微服务为SOA的进化。
+
+A service-oriented application is an application that is composed largely of services, which are often in a hierarchy.
+
+see in pic
+
+http://baijiahao.baidu.com/s?id=1566727073842273&wfr=spider&for=pc&isFailFlag=1
+https://www.ibm.com/support/knowledgecenter/en/SSMQ79_9.5.1/com.ibm.egl.pg.doc/topics/pegl_serv_overview.html
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
