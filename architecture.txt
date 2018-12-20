@@ -27,9 +27,69 @@ https://www.ibm.com/support/knowledgecenter/en/SSMQ79_9.5.1/com.ibm.egl.pg.doc/t
 
 
 
+2. Docker and Kubernetes
+
+Docker:
+
+Linux Container(LXC)
+
+Docker Hub (common image repository)
+
+registry.docker-cn.com
+
+(1) wordpress container:
+$ docker container run \
+  --rm \
+  --name wordpress \
+  --volume "$PWD/":/var/www/html \
+  php:5.6-apache
+
+
+(2) wordpressdb container:
+ $ docker container run \
+  -d \
+  --rm \
+  --name wordpressdb \
+  --env MYSQL_ROOT_PASSWORD=123456 \
+  --env MYSQL_DATABASE=wordpress \
+  mysql:5.7
+
+(3)
+FROM php:5.6-apache
+RUN docker-php-ext-install mysqli
+CMD apache2-foreground
+
+docker container run \
+  --rm \
+  --name wordpress \
+  --volume "$PWD/":/var/www/html \
+  --link wordpressdb:mysql \
+  phpwithmysql
+
+Kubernetes:
+
+平台即服务（PaaS）的简化和基础架构即服务（IaaS）的灵活
+
+不部署源代码，也不编译程序。持续集成 (CI) 工作流程是不同的用户和项目拥有其各自不同的需求和表现的地方。所以，Kubernetes 支持分层 CI 工作流程，却并不监听每层的工作状态。
+
+在k8s里面，集群调度的最小单元就是一个pod，一个pod可以是一个容器，也可以是多个容器，例如你运行一个程序，其中使用了nginx，使用mysql了，使用了jetty，那么可以将这三个使用在同一个pod中，对他们提供统一的调配能力，一个pod只能运行在一个主机上，而一个主机上可以有多个pod。
+
+基于这种模式下面的，我们引入了Jenkins工具，通过Jenkins来拉取svn/git代码到服务器中，再Jenkins中编写Linux运行脚本，通过脚本我们就可以对代码进行编译运行，然后重新发布到服务器中运行。后端人员也不需要通知Linux运维人员来执行这个操作，直接再Jenkins的控制台就可以执行了。
+
+
+基于上面的问题，我们引入了docker，然后修改Jenkins相关的Linux脚本。将项目按照模块来划分，每一个项目都可以单独来构建，各个项目之间没有必然的依赖。每个模块都会被构建为一个docker镜像，然后进行部署。这样我们就可以做到，针对于具体的模块来单独的部署，而且不会对其它模块产生任务影响。
+
+基于上面的问题，我们引入了kubernetes（简称k8s），通过k8s我们可以在k8s给我们提供一个管理平台上面就可以做到上面的这些需求，比如关闭某个服务，添加某个服务、监控服务的运行状态等等之类的。
+
+在开发机开发代码后提交到gitlab
+之后通过webhook插件触发jenkins进行构建，jenkins将代码打成docker镜像，push到docker-registry
+之后将在k8s-master上执行rc、service的创建，进而创建Pod，从私服拉取镜像，根据该镜像启动容器
 
 
 
+http://www.ruanyifeng.com/blog/2018/02/docker-wordpress-tutorial.html
+https://blog.csdn.net/linzhiqiang0316/article/details/80792247
+http://www.dockone.io/article/932
 
 
 
