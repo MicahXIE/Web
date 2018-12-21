@@ -1,0 +1,83 @@
+1. http://www.cnblogs.com/houruikk/p/6623594.html
+
+目前在UNIX和LINUX平台下使用最广泛的免费 Web 服务器有Apache和 Nginx
+
+用户输入 URL，客户端发送请求，控制器（Controller）首先会拿到请求，然后用模型（Models）从数据库取出所有需要的数据，进行必要的处理，将处理后的结果发送给 视图（View），视图利用获取到的数据，进行渲染生成 Html Response返回给客户端。
+
+2.
+
+(1) Advanced knowledge of application, data and infrastructure architecture disciplines
+
+(2) Hands-on experience developing cloud native applications on platforms like CloudFoundry,
+Kubernetes, DC/OS, Heroku, AWS, GCP, Azure, etc.
+
+(3) Exposure to Chaos Engineering principles for delivery of highly available & reliable software
+on cloud platforms using tools such as Chaos Monkey is a strong plus
+
+(4) Exposure to resiliency patterns like circuit breakers, bulkheads, backpressure, etc. using
+tools like Hystrix is a strong plus
+
+(5) Exposure to effective operational patterns like SLOs, metrics, health checks, error budgets,
+distributed tracing, etc., using tools like Prometheus, Grafana, Zipkin, ELK, etc. is a strong
+plus
+
+
+CI Docker Kubernetes
+
+microservice restful API 
+
+MQ comparision
+
+Container-based microservices are faster to build, test and deploy
+
+microservice
+https://www.cnblogs.com/imyalost/p/6792724.html
+
+
+microservice:
+概念：把一个大型的单个应用程序和服务拆分为数个甚至数十个的支持微服务，它可扩展单个组件而不是整个的应用程序堆栈，从而满足服务等级协议。
+
+Martin Fowler
+《企业应用架构模式》、《UML精粹》和《重构》
+
+
+microservices vs Monolithic
+
+Monolithic:
+Apache Tomcat Weblogic EJB ORACLE         JBOSS EJB?
+
+分库分表
+
+Nginx (X data duplication)    
+microservices (Y functional decomposition)
+data db (Z data partitioning)
+
+
+SOA vs Microservice
+
+SOA:
+Gartner Group
+SOA架构中有两个主要角色：服务提供者（Provider）和服务使用者（Consumer）。
+
+Microservices:
+微服务使用轻量级HTTP、REST或Thrift API进行通信
+
+REST、SOAP、AMQP、JMS、MSMQ、RMI或者.NET Remoting
+
+https://blog.csdn.net/chszs/article/details/78515231
+http://dockone.io/article/1646
+
+elasticsearch
+MapReduce 
+IaaS PaaS
+
+automation testing
+
+Ansible playbooks
+
+
+
+
+
+
+

@@ -92,8 +92,19 @@ https://blog.csdn.net/linzhiqiang0316/article/details/80792247
 http://www.dockone.io/article/932
 
 
+3. MQ: RabbitMQ RocketMQ ActiveMQ Kafka
+
+https://blog.csdn.net/weiwangchao_/article/details/79471112
 
 
+4. Chaos Monkey
+https://juejin.im/post/5ada050d6fb9a07acb3c6e5f
+https://netflix.github.io/chaosmonkey/
+
+
+5. Hystrix
+
+6. Zipkin
 
 
 
