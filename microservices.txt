@@ -1,0 +1,19 @@
+1. Tomcat 
+webapps folder 
+(1) can put .war package 
+(2) can put vue/iim/new-retail-dashboard
+
+new-retail-dashboard includes:
+static/
+index.html
+
+2. 微服务架构选型
+(1) 微服务实例开发Spring Boot
+(2) 服务的注册与发现Spring Cloud Eureka, Apache Zookeeper, Dubbo
+(3) 负载均衡Spring Cloud Ribbon 和 Dubbo
+(4) 服务容错使用Spring Cloud Hystrix
+(5) API网关Spring Cloud Zuul, Spring Reactor, Netty or NodeJS
+(6) 分布式配置中心 Spring Cloud Config
+(7) 调试 Swagger
+(8) 部署 Docker
+(9) 持续集成 Jenkins
