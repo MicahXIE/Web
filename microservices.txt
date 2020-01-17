@@ -17,3 +17,12 @@ index.html
 (7) 调试 Swagger
 (8) 部署 Docker
 (9) 持续集成 Jenkins
+
+3. Spring Boot 优点
+(1) 可快速构建独立的Spring应用程序
+(2) 内嵌Servlet容器，无需单独安装容器即可独立运行项目
+(3) 对主流开发框架的无配置集成
+(4) 提供开箱即用的Spring插件，简化了Maven, Gradle的配置
+(5) 自动配置Spring, 极大地提高了开发，部署效率
+(6) 无需任何XML配置
+
