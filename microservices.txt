@@ -16,8 +16,8 @@ index.html
 (6) 分布式配置中心 Spring Cloud Config
 (7) 调试 Swagger
 (8) 部署 Docker
-(9) 持续集成 Jenkins
 
+(9) 持续集成 Jenkins
 3. Spring Boot 优点
 (1) 可快速构建独立的Spring应用程序
 (2) 内嵌Servlet容器，无需单独安装容器即可独立运行项目
@@ -25,4 +25,23 @@ index.html
 (4) 提供开箱即用的Spring插件，简化了Maven, Gradle的配置
 (5) 自动配置Spring, 极大地提高了开发，部署效率
 (6) 无需任何XML配置
+
+4. JVM 堆设置
+JVM堆内存分为2块：Permanent Space 和 Heap Space。
+
+Permanent 即 持久代（Permanent Generation），主要存放的是Java类定义信息，与垃圾收集器要收集的Java对象关系不大。
+堆内存分为两个部分：年轻代和老年代。我们平常所说的垃圾回收，主要回收的就是堆区。更细一点划分新生代又可划分为Eden区和2个Survivor区（From Survivor和To Survivor）。
+
+新生代 ( Young ) 与老年代 ( Old ) 的比例的值为 1:2 ( 该值可以通过参数 –XX:NewRatio 来指定 )
+默认的，Eden : from : to = 8 : 1 : 1 ( 可以通过参数 –XX:SurvivorRatio 来设定 )，即： Eden = 8/10 的新生代空间大小，from = to = 1/10 的新生代空间大小。
+
+-Xmx   Java Heap最大值，默认值为物理内存的1/4，最佳设值应该视物理内存大小及计算机内其他内存开销而定；
+-Xms   Java Heap初始值，Server端JVM最好将-Xms和-Xmx设为相同值，开发测试机JVM可以保留默认值；
+-Xmn   Java Heap Young区大小，不熟悉最好保留默认值；
+-Xss   每个线程的Stack大小，不熟悉最好保留默认值；
+-XX:+UseParallelGC	启用并行GC
+
+reference: https://www.cnblogs.com/jack204/archive/2012/07/02/2572932.html
+
+
 
