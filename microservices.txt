@@ -67,12 +67,69 @@ JVM 堆： Java堆是整个虚拟机所管理的最大内存区域，所有的�
        在JDK1.8中，已经移除了永久代，用元空间来替代。元空间的本质和永久代类似，都是对JVM规范中方法区的实现。不过元空间与永久代之间最大的区别在于：元空间并不在虚拟机中，而是使用本地内存。因此，默认情况下，元空间的大小仅受本地内存限制。
 
 
+6. Java synchronized 
+
+synchronized 是 Java 中的关键字，是利用锁的机制来实现同步的。
+
+互斥性：即在同一时间只允许一个线程持有某个对象锁，通过这种特性来实现多线程中的协调机制，这样在同一时间只有一个线程对需同步的代码块(复合操作)进行访问。互斥性我们也往往称为操作的原子性。
+
+可见性：必须确保在锁被释放之前，对共享变量所做的修改，对于随后获得该锁的另一个线程是可见的（即在获得锁时应获得最新共享变量的值），否则另一个线程可能是在本地缓存的某个副本上继续操作从而引起不一致。
+
+当两个并发线程访问同一个对象object中的这个synchronized(this)同步代码块时，一个时间内只能有一个线程得到执行。另一个线程必须等待当前线程执行完这个代码块以后才能执行该代码块。
+
+//synchronized修饰一个方法时，这个方法叫同步方法。
+public synchronized void test() {
+//方法体``
+
+}
+
+synchronized（Object） {
+//括号中表示需要锁的对象.
+//线程执行的时候会对Object上锁
+}
 
 
+7. Java ReentrantLock
 
 
+synchronized vs ReentrantLock
+
+(1) 这两种方式最大区别就是对于Synchronized来说，它是java语言的关键字，是原生语法层面的互斥，需要jvm实现。而ReentrantLock它是JDK 1.5之后提供的API层面的互斥锁，需要lock()和unlock()方法配合try/finally语句块来完成。
+(2) synchronized既可以修饰方法，也可以修饰代码块。
 
 
+private ReentrantLock lock = new ReentrantLock();
+public void run() {
+    lock.lock();
+    try{
+        for(int i=0;i<5;i++){
+            System.out.println(Thread.currentThread().getName()+":"+i);
+        }
+    }finally{
+        lock.unlock();
+    }
+}
 
+ReentrantLock是Lock的实现类，是一个互斥的同步器，在多线程高竞争条件下，ReentrantLock比synchronized有更加优异的性能表现。
 
+1 用法比较
+Lock使用起来比较灵活，但是必须有释放锁的配合动作
+Lock必须手动获取与释放锁，而synchronized不需要手动释放和开启锁
+Lock只适用于代码块锁，而synchronized可用于修饰方法、代码块等
+
+2 特性比较
+
+ReentrantLock的优势体现在：
+
+具备尝试非阻塞地获取锁的特性：当前线程尝试获取锁，如果这一时刻锁没有被其他线程获取到，则成功获取并持有锁
+能被中断地获取锁的特性：与synchronized不同，获取到锁的线程能够响应中断，当获取到锁的线程被中断时，中断异常将会被抛出，同时锁会被释放
+超时获取锁的特性：在指定的时间范围内获取锁；如果截止时间到了仍然无法获取锁，则返回
+
+3 注意事项
+
+在使用ReentrantLock类的时，一定要注意三点：
+
+在finally中释放锁，目的是保证在获取锁之后，最终能够被释放
+不要将获取锁的过程写在try块内，因为如果在获取锁时发生了异常，异常抛出的同时，也会导致锁无故被释放。
+ReentrantLock提供了一个newCondition的方法，以便用户在同一锁的情况下可以根据不同的情况执行等待或唤醒的动作。
 
